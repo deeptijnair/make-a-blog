@@ -8,8 +8,9 @@ const useFetch = (url) => {
 
     useEffect(() => {
 
-        const abortCont = new AbortController();
-        setTimeout(() => {
+        const abortCont = new AbortController(); // Create an abort controller to cancel the fetch request if needed
+        
+
          fetch(url)
              .then(res => {
                  if(!res.ok){
@@ -18,7 +19,7 @@ const useFetch = (url) => {
                  return res.json();
              })
              .then(data => {
-                 setData(data);
+                 setData(data.blogs); // Assuming the response is an object with a 'blogs' property
                  setError(null);
                  setIsLoading(false);
              })
@@ -31,10 +32,9 @@ const useFetch = (url) => {
                     setIsLoading(false);
                 }
              })
-        }, 1000);
 
-        return () => abortCont.abort();
-     }, [url]);
+        return () => abortCont.abort(); // Cleanup function to abort the fetch request if the component unmounts or the URL changes
+     }, [url]); // Dependency array to re-run the effect when the URL changes
 
      return { data, isLoading, error};
 }

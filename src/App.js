@@ -4,12 +4,15 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Create from './Create';
 import BlogDetails from './BlogDetails';
 import NotFound from './NotFound';
+import { ChakraProvider } from '@chakra-ui/react';
+import system from './theme';
+
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <Navbar bg="red.200"/>
         <div className='content'>
           <Switch>
             <Route exact path='/'>
@@ -27,8 +30,7 @@ function App() {
           </Switch>
         </div>
       </div>
-    </Router>
-    
+    </Router> 
   );
 }
 
